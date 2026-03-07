@@ -15,6 +15,7 @@ typedef struct {
 Mtype* scanElement(Mtype*);
 void printElement(const Mtype*);
 void printElementAsDouble(const Mtype*);
+Mtype* simplify(Mtype*);
 
 Matrix* create(size_t);
 Matrix* copy(const Matrix*);
