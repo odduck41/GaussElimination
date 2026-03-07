@@ -21,7 +21,8 @@ Mtype calculateWithGaussMethod(Matrix* m) {
         }
     }
     Mtype res;
-    res.numerator = res.denominator = 1;
+    res.numerator = m->k.denominator;
+    res.denominator = m->k.numerator;
     for (size_t i = 0; i < m->size_; ++i) {
         res.numerator *= m->matrix_[i][i].numerator;
         res.denominator *= m->matrix_[i][i].denominator;
@@ -32,8 +33,11 @@ Mtype calculateWithGaussMethod(Matrix* m) {
     return res;
 }
 
-Mtype stupidCalculate(Matrix* m) {
+Mtype stupidCalculate(const Matrix* m) {
+    Mtype res;
+    for (size_t i = 0; i < m->size_; ++i) {
 
+    }
 }
 
 int main() {
