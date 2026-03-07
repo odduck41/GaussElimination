@@ -85,3 +85,10 @@ void printMatrixDoubles(const Matrix* m) {
         printf("\n");
     }
 }
+
+Matrix* swapLines(Matrix* m, const size_t line1, const size_t line2) {
+    Mtype* tmp = m->matrix_[line1];
+    m->matrix_[line1] = m->matrix_[line2];
+    m->matrix_[line2] = tmp;
+    return m;
+}
