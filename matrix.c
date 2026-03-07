@@ -3,6 +3,29 @@
 
 #include "matrix.h"
 
+long long gcd(const long long a, const long long b) {
+    return b ? gcd(b, a % b) : a;
+}
+
+Mtype* simplify(Mtype* m) {
+    if (m->numerator == 0 && m->denominator == 0) {
+        m->numerator = m->denominator = 1;
+        return m;
+    }
+    if (m->numerator == 0) {
+        m->denominator = 1;
+        return m;
+    }
+    if (m->denominator == 0) {
+        m->numerator = 1;
+        return m;
+    }
+    long long gcd_ = gcd(m->numerator, m->denominator);
+    m->numerator /= gcd_;
+    m->denominator /= gcd_;
+    return m;
+}
+
 Mtype* scanElement(Mtype* el) {
     el->numerator = 0;
     el->denominator = 1;
@@ -24,7 +47,7 @@ Mtype* scanElement(Mtype* el) {
         scanf("%c", &now);
     }
 
-    return el;
+    return simplify(el);
 }
 
 void printElement(const Mtype* el) {
@@ -34,7 +57,7 @@ void printElement(const Mtype* el) {
 void printElementAsDouble(const Mtype* el) {
     double res = (double)el->numerator;
     res /= (double)el->denominator;
-    printf("%g", res);
+    printf("%.7g", res);
 }
 
 Matrix* create(const size_t sz) {
@@ -61,6 +84,7 @@ Matrix* scanMatrix(Matrix* m) {
     for (size_t i = 0; i < m->size_; ++i) {
         for (size_t j = 0; j < m->size_; ++j) {
             scanElement(m->matrix_[i] + j);
+            simplify(m->matrix_[i] + j);
         }
     }
     return m;
@@ -87,8 +111,50 @@ void printMatrixDoubles(const Matrix* m) {
 }
 
 Matrix* swapLines(Matrix* m, const size_t line1, const size_t line2) {
+    m->k.numerator *= -1;
     Mtype* tmp = m->matrix_[line1];
     m->matrix_[line1] = m->matrix_[line2];
     m->matrix_[line2] = tmp;
     return m;
 }
+
+Matrix* mulLine(Matrix* m, const size_t line, const Mtype k) {
+    m->k.numerator *= k.numerator;
+    m->k.denominator *= k.denominator;
+    for (size_t i = 0; i < m->size_; ++i) {
+        m->matrix_[line][i].numerator *= k.numerator;
+        m->matrix_[line][i].denominator *= k.denominator;
+        simplify(m->matrix_[line] + i);
+    }
+    return m;
+}
+
+Matrix* addLineToKline(Matrix* m, const size_t line1, const Mtype k, const size_t line2) {
+    for (size_t i = 0; i < m->size_; ++i) {
+        m->matrix_[line2][i].numerator *= k.numerator;
+        m->matrix_[line2][i].denominator *= k.denominator;
+    }
+
+    for (size_t i = 0; i < m->size_; ++i) {
+        m->matrix_[line1][i].numerator *= m->matrix_[line2][i].denominator;
+        m->matrix_[line1][i].numerator +=
+            m->matrix_[line2][i].numerator * m->matrix_[line1][i].denominator;
+        m->matrix_[line1][i].denominator *= m->matrix_[line2][i].denominator;
+        simplify(m->matrix_[line1] + i);
+    }
+
+    for (size_t i = 0; i < m->size_; ++i) {
+        m->matrix_[line2][i].numerator /= k.numerator;
+        m->matrix_[line2][i].denominator /= k.denominator;
+        simplify(m->matrix_[line2] + i);
+    }
+    return m;
+}
+
+Matrix* destroy(Matrix* m) {
+    for (size_t i = 0; i < m->size_; ++i) free(m->matrix_[i]);
+    free(m->matrix_);
+
+    return m;
+}
+
