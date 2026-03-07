@@ -13,6 +13,8 @@ typedef struct {
 } Matrix;
 
 Mtype* scanElement(Mtype*);
+void printElement(const Mtype*);
+void printElementAsDouble(const Mtype*);
 
 Matrix* create(size_t);
 Matrix* scanMatrix(Matrix*);
