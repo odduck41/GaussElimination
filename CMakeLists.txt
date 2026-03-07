@@ -6,4 +6,5 @@ set(CMAKE_C_STANDARD 23)
 add_executable(FSR_practice
         main.c
         matrix.c
+        DetCalculation.cpp
 )
