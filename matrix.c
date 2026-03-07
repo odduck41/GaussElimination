@@ -11,7 +11,7 @@ Mtype* scanElement(Mtype* el) {
     while ('0' <= now && now <= '9') {
         el->numerator *= 10;
         el->numerator += now - '0';
-        scanf("%c", &now);
+        scanf(" %c", &now);
     }
 
     if (now != '.') return el;
@@ -34,7 +34,7 @@ void printElement(const Mtype* el) {
 void printElementAsDouble(const Mtype* el) {
     double res = (double)el->numerator;
     res /= (double)el->denominator;
-    printf("%g", res);
+    printf("%.4lf", res);
 }
 
 Matrix* create(const size_t sz) {
@@ -55,33 +55,4 @@ Matrix* create(const size_t sz) {
     }
 
     return matrix;
-}
-
-Matrix* scanMatrix(Matrix* m) {
-    for (size_t i = 0; i < m->size_; ++i) {
-        for (size_t j = 0; j < m->size_; ++j) {
-            scanElement(m->matrix_[i] + j);
-        }
-    }
-    return m;
-}
-
-void printMatrix(const Matrix* m) {
-    for (size_t i = 0; i < m->size_; ++i) {
-        for (size_t j = 0; j < m->size_; ++j) {
-            printElement(m->matrix_[i] + j);
-            printf(" ");
-        }
-        printf("\n");
-    }
-}
-
-void printMatrixDoubles(const Matrix* m) {
-    for (size_t i = 0; i < m->size_; ++i) {
-        for (size_t j = 0; j < m->size_; ++j) {
-            printElementAsDouble(m->matrix_[i] + j);
-            printf(" ");
-        }
-        printf("\n");
-    }
 }

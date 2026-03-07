@@ -18,8 +18,6 @@ void printElementAsDouble(const Mtype*);
 
 Matrix* create(size_t);
 Matrix* scanMatrix(Matrix*);
-void printMatrix(const Matrix*);
-void printMatrixDoubles(const Matrix*);
 Matrix* swapLines(Matrix*, size_t, size_t);
 Matrix* mulLine(Matrix*, size_t, Mtype);
 Matrix* addLineToKline(Matrix*, size_t, Mtype, size_t);
