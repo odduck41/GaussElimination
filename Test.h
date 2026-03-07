@@ -1,8 +1,14 @@
-//
-// Created by Lev Dymchenko on 07.03.2026.
-//
+#ifndef TEST_H
+#define TEST_H
+#include <assert.h>
+#include <stdlib.h>
+#include <time.h>
 
-#ifndef FSR_PRACTICE_TEST_H
-#define FSR_PRACTICE_TEST_H
+#include "matrix.h"
+#include "DetCalculation.h"
 
-#endif //FSR_PRACTICE_TEST_H
+Matrix* generate(size_t sz);
+
+void test();
+
+#endif //TEST_H

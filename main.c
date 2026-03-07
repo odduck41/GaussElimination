@@ -1,13 +1,17 @@
-#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "DetCalculation.h"
 
+#include "DetCalculation.h"
+#include "Test.h"
+
+#define TEST
 
 int main() {
-
+#ifdef TEST
+    test();
+#else
     size_t sz;
-    scanf("%llu", &sz);
+    scanf("%zu", &sz);
     Matrix* m = create(sz);
     scanMatrix(m);
     Matrix* cp = copy(m);
@@ -22,4 +26,5 @@ int main() {
 
     free(destroy(cp));
     free(destroy(m));
+#endif
 }
