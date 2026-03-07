@@ -57,7 +57,7 @@ void printElement(const Mtype* el) {
 void printElementAsDouble(const Mtype* el) {
     double res = (double)el->numerator;
     res /= (double)el->denominator;
-    printf("%.7g", res);
+    printf("%.7lf", res);
 }
 
 Matrix* create(const size_t sz) {
