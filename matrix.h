@@ -17,6 +17,7 @@ void printElement(const Mtype*);
 void printElementAsDouble(const Mtype*);
 
 Matrix* create(size_t);
+Matrix* copy(const Matrix*);
 Matrix* scanMatrix(Matrix*);
 void printMatrix(const Matrix*);
 void printMatrixDoubles(const Matrix*);

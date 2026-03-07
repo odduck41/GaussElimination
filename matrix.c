@@ -80,6 +80,26 @@ Matrix* create(const size_t sz) {
     return matrix;
 }
 
+Matrix* copy(const Matrix* m) {
+    Matrix* matrix = malloc(sizeof(Matrix));
+
+    matrix->k = m->k;
+
+    matrix->size_ = m->size_;
+    const size_t sz = matrix->size_;
+
+    matrix->matrix_ = (Mtype**)malloc(sz * sizeof(Mtype*));
+    for (size_t i = 0; i < sz; ++i) {
+        matrix->matrix_[i] = (Mtype*)malloc(sz * sizeof(Mtype));
+        for (size_t j = 0; j < sz; ++j) {
+            matrix->matrix_[i][j].numerator = m->matrix_[i][j].numerator;
+            matrix->matrix_[i][j].denominator = m->matrix_[i][j].denominator;
+        }
+    }
+
+    return matrix;
+}
+
 Matrix* scanMatrix(Matrix* m) {
     for (size_t i = 0; i < m->size_; ++i) {
         for (size_t j = 0; j < m->size_; ++j) {
