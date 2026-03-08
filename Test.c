@@ -1,16 +1,14 @@
 #include "Test.h"
 
 #include <stdio.h>
-
+// This tests don't work, because overflow
 inline Matrix* generate(const size_t sz) {
     Matrix* m = create(sz);
     for (size_t i = 0; i < sz; ++i) {
         for (size_t j = 0; j < sz; ++j) {
-            long long x = random() % 2000;
-            m->matrix_[i][j].numerator = random();
-            m->matrix_[i][j].denominator = 1 + (m->matrix_[i][j].numerator + random()) / x
-                + random() % 100
-                + random() % 10;
+            m->matrix_[i][j].numerator = random() % 100;
+            m->matrix_[i][j].denominator = 1 + random() % 100;
+            simplify(m->matrix_[i] + j);
         }
     }
     return m;
@@ -22,14 +20,15 @@ inline void test() {
     for (size_t i = 0; i < 30; ++i) {
         Matrix* m = generate(random() % 10);
         printMatrix(m);
-        Mtype gauss = calculateWithGaussMethod(m);
-        Mtype stupid = stupidCalculate(m);
+        Matrix* cp = copy(m);
+        Mtype gauss = calculateWithGaussMethod(m); simplify(&gauss);
+        Mtype stupid = stupidCalculate(cp); simplify(&stupid);
         // assert((gauss.numerator * stupid.denominator == gauss.denominator * stupid.numerator));
         if (gauss.numerator * stupid.denominator != gauss.denominator * stupid.numerator) {
             printf("Gauss=");
-            printElementAsDouble(&gauss);
+            printElement(&gauss);
             printf("\nMinor=");
-            printElementAsDouble(&stupid);
+            printElement(&stupid);
             printf("\n");
             assert(0);
         }

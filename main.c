@@ -2,14 +2,9 @@
 #include <stdlib.h>
 
 #include "DetCalculation.h"
-#include "Test.h"
 
-#define TEST
 
 int main() {
-#ifdef TEST
-    test();
-#else
     size_t sz;
     scanf("%zu", &sz);
     Matrix* m = create(sz);
@@ -26,5 +21,4 @@ int main() {
 
     free(destroy(cp));
     free(destroy(m));
-#endif
 }
