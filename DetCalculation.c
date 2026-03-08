@@ -23,9 +23,9 @@ Mtype calculateWithGaussMethod(Matrix* m) {
     for (size_t i = 0; i < m->size_; ++i) {
         res.numerator *= m->matrix_[i][i].numerator;
         res.denominator *= m->matrix_[i][i].denominator;
+        simplify(&res);
     }
 
-    simplify(&res);
 
     return res;
 }

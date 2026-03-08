@@ -13,12 +13,12 @@ int main() {
 
     const Mtype res = calculateWithGaussMethod(m);
     const Mtype res2 = stupidCalculate(cp);
-    printf("{\nGauss_method_result: ");
+    printf("{\n\"Gauss_method_result\": \"");
     printElementAsDouble(&res);
-    printf(",\n");
-    printf("Minor_method_result: ");
+    printf("\",\n");
+    printf("\"Minor_method_result\": \"");
     printElementAsDouble(&res2);
-    printf("\n}");
+    printf("\"\n}");
 
     free(destroy(cp));
     free(destroy(m));
