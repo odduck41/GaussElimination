@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import random
 import subprocess
@@ -21,7 +23,14 @@ subprocess.run("cmake --build cmake-build-debug --target FSR_practice -j 6",
 
 path = ["cmake-build-debug/FSR_practice"]
 
-amount = int(20)
+arguments = argparse.ArgumentParser()
+arguments.add_argument("-q", "--quantity",
+                       dest="quantity",
+                       type=int,
+                       help="Amount of tests")
+
+
+amount = int(arguments.parse_args().quantity)
 passed = 0
 
 for _ in range(amount):
