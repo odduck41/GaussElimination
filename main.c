@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "DetCalculation.h"
+#include "matrix/calc/DetCalculation.h"
 
 
 int main() {

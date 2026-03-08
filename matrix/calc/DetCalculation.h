@@ -1,6 +1,6 @@
 #ifndef DETCALCULATION_H
 #define DETCALCULATION_H
-#include "matrix.h"
+#include "../matrix.h"
 
 Mtype calculateWithGaussMethod(Matrix*);
 Mtype stupidCalculate(const Matrix*);

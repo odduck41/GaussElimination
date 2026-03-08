@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "matrix.h"
+#include "../matrix.h"
 
 Mtype calculateWithGaussMethod(Matrix* m) {
     for (size_t i = 0; i < m->size_; ++i) {

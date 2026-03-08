@@ -1,6 +1,11 @@
 #include "Test.h"
 
+#include <assert.h>
 #include <stdio.h>
+#include <time.h>
+
+#include "../matrix/calc/DetCalculation.h"
+
 // This tests don't work, because overflow
 inline Matrix* generate(const size_t sz) {
     Matrix* m = create(sz);
@@ -17,6 +22,7 @@ inline Matrix* generate(const size_t sz) {
 
 inline void test() {
     srand(time(NULL));
+
     for (size_t i = 0; i < 30; ++i) {
         Matrix* m = generate(random() % 10);
         printMatrix(m);

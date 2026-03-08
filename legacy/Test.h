@@ -1,11 +1,8 @@
 #ifndef TEST_H
 #define TEST_H
-#include <assert.h>
 #include <stdlib.h>
-#include <time.h>
 
-#include "matrix.h"
-#include "DetCalculation.h"
+#include "../matrix/matrix.h"
 
 Matrix* generate(size_t sz);
 
