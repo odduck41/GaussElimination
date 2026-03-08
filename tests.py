@@ -3,6 +3,7 @@ import random
 import subprocess
 import json
 
+subprocess.run("cmake --build cmake-build-debug --target FSR_practice -j 6", shell=True)
 path = ["cmake-build-debug/FSR_practice"]
 
 for i in range(10):
