@@ -19,7 +19,7 @@ def compile_program():
             exit(0)
 
 
-    subprocess.run("cmake --build cmake-build-debug --target FSR_practice -j 6",
+    subprocess.run("cmake --build cmake-build-debug --target GaussElimination -j 6",
                    capture_output=False,
                    shell=True)
 
@@ -52,7 +52,7 @@ def get_arguments() -> dict:
     return args
 
 def run_test(size=-1, max_sz=-1) -> int:
-    path = ["cmake-build-debug/FSR_practice"]
+    path = ["cmake-build-debug/GaussElimination"]
 
     if size == -1:
         size = random.randint(1, max_sz)
