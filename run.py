@@ -28,7 +28,7 @@ def get_arguments() -> dict:
     arguments.add_argument("-t", "--tests",
                        dest="tests",
                        type=int,
-                       help="Amount of tests(default=10)")
+                       help="Amount of tests(default=100)")
 
     arguments.add_argument("-s", "--size",
                            dest="size",
@@ -47,7 +47,7 @@ def get_arguments() -> dict:
     if args["size"] is None:
         args["size"] = -1
     if args["tests"] is None:
-        args["tests"] = 10
+        args["tests"] = 100
 
     return args
 
