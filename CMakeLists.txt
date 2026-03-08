@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 4.0)
-project(FSR_practice C)
+project(GaussElimination C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(FSR_practice
+add_executable(GaussElimination
         main.c
         matrix/matrix.c
         matrix/calc/DetCalculation.c
