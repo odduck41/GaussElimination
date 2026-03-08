@@ -3,12 +3,18 @@ import random
 import subprocess
 import json
 
-subprocess.run("cmake --build cmake-build-debug --target FSR_practice -j 6", shell=True)
+subprocess.run("cmake --build cmake-build-debug --target FSR_practice -j 6",
+               capture_output=False,
+               shell=True)
 path = ["cmake-build-debug/FSR_practice"]
 
-for i in range(10):
+for _ in range(10):
     size = random.randint(1, 5)
-    matrix = [[random.randint(0, 100) for _ in range(size)] for _ in range(size)]
+    matrix = [[
+        round(random.uniform(0, 15), random.randint(0, 3))
+            for _ in range(size)
+    ] for _ in range(size)]
+
     mat = str()
     for line in matrix:
         mat += " ".join(list(map(str, line)))
@@ -24,17 +30,27 @@ for i in range(10):
     res = str()
     if result.returncode == 0:
         print("\033[1;m--------\033[0m")
-        res = json.loads(result.stdout)
-
+        try:
+            res = dict(json.loads(result.stdout))
+        except json.decoder.JSONDecodeError:
+            print("\033[1;31mPARSING ERROR\n")
+            print(size)
+            print(mat)
+            print(f"Output:\n\n{result.stdout}")
+            exit(0)
         matrix = np.matrix(matrix)
-        res["Np"] = str(np.round(np.linalg.det(matrix)))
-        if int(float(res["Gauss_method_result"])) != int(float(res["Minor_method_result"])):
+        res["Np"] = np.linalg.det(matrix)
+
+        for key in res.keys():
+            res[key] = round(float(res[key]), 4)
+
+        if float(res["Gauss_method_result"]) != float(res["Minor_method_result"]):
             print("\033[1;31mERROR: GAUSS NOT EQUAL TO MINOR\n")
             print(size)
             print(mat)
             print(f"Result:\n{res}")
             exit(0)
-        elif int(float(res["Gauss_method_result"])) != int(float(res["Np"])):
+        elif float(res["Gauss_method_result"]) != float(res["Np"]):
             print("\033[1;31mERROR: MY RESULT NOT EQUAL TO NUMPY\n")
             print(size)
             print(mat)
@@ -42,6 +58,6 @@ for i in range(10):
             exit(0)
         print(f"\033[1;32mOK: {res}\033[0m")
     else:
-        print("ERROR")
+        print("\033[1;31mERROR")
         print(mat)
         exit(0)
