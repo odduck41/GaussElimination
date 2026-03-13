@@ -53,3 +53,5 @@ overflow.
 
 A possible solution would be arbitrary-precision arithmetic, which is not
 implemented in this project.
+
+Upd: min element in a column first -> max element in column first raised amount of passed tests up to about 630 

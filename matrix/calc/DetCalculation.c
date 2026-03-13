@@ -6,7 +6,7 @@ Mtype calculateWithGaussMethod(Matrix* m) {
         for (size_t j = i + 1; j < m->size_; ++j) {
             const auto a = m->matrix_[i][i].numerator * m->matrix_[j][i].denominator;
             const auto b = m->matrix_[j][i].numerator * m->matrix_[i][i].denominator;
-            if (!a || (b && a > b)) {
+            if (!a || (b && a < b)) {
                 m = swapLines(m, i, j);
             }
         }
